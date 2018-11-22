@@ -2,9 +2,13 @@
 
 자바프로그래밍 수업시간에 배운 실습예제와 텀프로젝트를 올렸습니다.
 
+개발환경 : 실습 - 메모장, 텀프로젝트 - Eclipse
+
 자바 코드 저장형식 .java
 
 JAVA jdk 설치 사이트 : http://www.oracle.com/technetwork/java/javase/downloads/index.html
+
+Eclipse 설치 사이트 : https://www.eclipse.org/downloads/
 
 <메모장을 이용하여 코딩할때 주의할 점>
     
