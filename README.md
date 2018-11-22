@@ -32,10 +32,15 @@ Eclipse 설치 사이트 : https://www.eclipse.org/downloads/
  <Eclipse 프로젝트 시작하기>
         
         1. File - New - Project 선택 후 Next 클릭
+        
         2. Project name에 프로젝트 이름을 적고 Finish 버튼 누르기
+        
         3. src폴더에서 오른쪽 마우스 클릭 New - Class 선택
+        
         4. Name에 클래스 이름을 적고 Finish 버튼 누르기
+        
         5. 코드작성
+        
         6. Debug As 또는 Run As 클릭 Eclipse는 컴파일과 실행이 동시에 일어남 
                 Debug As는 브레이크 포인트를 걸수있어서 오류찾기에 용이
  
