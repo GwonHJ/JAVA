@@ -5,13 +5,13 @@
 개발환경 : 실습 - 메모장, 텀프로젝트 - Eclipse
 
 
-# 실습예제
+## 실습예제
 
     수업시간에 교수님께서 설명해주신 개념을 이용하여 실습예제 푼 코드
     주된 내용은 파일명을 참고
 
     
-# 텀프로젝트
+## 텀프로젝트
 
 코드에 관한 설명은 코드에 주석으로 적혀있습니다.
 
@@ -25,6 +25,18 @@
       4. 추천 운동법
       
       
+### **실행화면 예시**
+
+#### 메인화면
+
+![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2e77b887-a7ea-4e77-add0-34e5e7495ae0/diet.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2e77b887-a7ea-4e77-add0-34e5e7495ae0/diet.png)
+
+#### 몸무게 관리
+
+![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c90a5ac6-9dcf-4794-abde-102386d22f2e/diet.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c90a5ac6-9dcf-4794-abde-102386d22f2e/diet.png)
+
+
+
 
 자바 코드 저장형식 .java
 
