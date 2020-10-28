@@ -16,12 +16,14 @@
 
 #### 메인화면
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2e77b887-a7ea-4e77-add0-34e5e7495ae0/diet.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2e77b887-a7ea-4e77-add0-34e5e7495ae0/diet.png)
+![diet메인화면](https://user-images.githubusercontent.com/45057466/97435772-416cb780-1964-11eb-9107-5890f643d45b.png)
+
 
 #### 몸무게 관리
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c90a5ac6-9dcf-4794-abde-102386d22f2e/diet.png]
-\
+![diet몸무게관리](https://user-images.githubusercontent.com/45057466/97435777-43367b00-1964-11eb-8ad1-fa11b9dea991.png)
+
+
 코드에 관한 설명은 코드에 주석으로 적혀있습니다.
 
     프로젝트명 : DietHelper
