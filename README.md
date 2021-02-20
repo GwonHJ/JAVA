@@ -1,4 +1,4 @@
-## 노션 : https://www.notion.so/SSAFY-1-2-13f47e7e4ca34fa4a69cb112d6661825
+[노션](https://www.notion.so/SSAFY-1-2-13f47e7e4ca34fa4a69cb112d6661825)
 ## 자바의 4가지 특성
 
 - 은닉(Encapsulation)
@@ -13,14 +13,18 @@
 3. switch ~ case문
 4. 상속
 5. this, super
-6. 다형성
-7. 생성자
-8. 추상화
-9. 인터페이스
-10. Inner클래스
-11. Collection
-12. 예외처리
-13. IO
+6. 접근제어자
+7. 다형성
+8. 생성자
+9. 추상화
+10. 인터페이스
+11. 추상클래스
+12. Inner클래스
+13. Collection
+14. 정렬
+15. 예외처리
+16. IO
+17. 객체직렬화(Serializable)
 
 -----------------------------------------------------------------------------------------------
 
@@ -243,7 +247,36 @@ cf) 상속은 본질적으로 재사용인데 반해, 인터페이스는 본질�
          while(itr.hasNext()){
         	temp = itr.next();
         }
-        ```
+	```
+
+
+### 15. 정렬
+
+- **Comparator**
+    - Sort할때 뒤에 Comparator를 상속받은 인스턴스를 삽입
+    - Comparator의 compare메소드를 오버라이딩 해서 사용
+    - Sort할때, Anonimous Class를 이용하면 편함
+
+    ```java
+    Collections.sort(list, new Comparator<Virus>(){
+
+    	@Override
+    	public int compare(Virus o1, Virus o2){
+    		return o1.getLevel() - o2. getLevel();
+    	}
+    });
+    ```
+
+- **Comparable**
+    - 정렬될 객체의 Class가 Comparable Interface를 가지고 있을때 사
+    - Comparable을 구현한 클래스는 compareTo메서드를 재정의 하여 sort기준을 정할수 있음
+
+    ```java
+    @Override
+    public int compareTo(Corona c){
+    	return this.spreadSpeed - c.spreadSpeed;
+    }
+    ```
 ### 16. 예외
 
 - 오류 Vs 예외
@@ -435,7 +468,7 @@ cf) 상속은 본질적으로 재사용인데 반해, 인터페이스는 본질�
 
 *참고:[https://blog.naver.com/force44/130096540429](https://blog.naver.com/force44/130096540429)*
 
-### 객체 직렬화(SerialLizable)
+### 18. 객체 직렬화(SerialLizable)
 
 ---
 
