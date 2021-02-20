@@ -1,3 +1,4 @@
+https://www.notion.so/SSAFY-1-2-13f47e7e4ca34fa4a69cb112d6661825
 ## 자바의 4가지 특성
 
 - 은닉(Encapsulation)
