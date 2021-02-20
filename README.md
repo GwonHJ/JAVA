@@ -1,4 +1,4 @@
-https://www.notion.so/SSAFY-1-2-13f47e7e4ca34fa4a69cb112d6661825
+## 노션 : https://www.notion.so/SSAFY-1-2-13f47e7e4ca34fa4a69cb112d6661825
 ## 자바의 4가지 특성
 
 - 은닉(Encapsulation)
@@ -7,6 +7,7 @@ https://www.notion.so/SSAFY-1-2-13f47e7e4ca34fa4a69cb112d6661825
 - 추상화(Abstraction)
 
 -----------------------------------------------------------------------------------------------
+
 1. 지역변수, 멤버변수
 2. 연산자
 3. switch ~ case문
@@ -16,9 +17,12 @@ https://www.notion.so/SSAFY-1-2-13f47e7e4ca34fa4a69cb112d6661825
 7. 생성자
 8. 추상화
 9. 인터페이스
-10. Inner
+10. Inner클래스
+11. Collection
+12. 예외처리
+13. IO
 
-
+-----------------------------------------------------------------------------------------------
 
 [1. 지역변수, 멤버변수 영역과 초기화](https://www.notion.so/0f1b5cb7da444e6ea7dd8161562a0d0b)
 
@@ -240,3 +244,245 @@ cf) 상속은 본질적으로 재사용인데 반해, 인터페이스는 본질�
         	temp = itr.next();
         }
         ```
+### 16. 예외
+
+- 오류 Vs 예외
+    - 오류(Error) : 내가 통제 못함
+    - 예외(Exception) : 내가 통제 가능
+- RuntimeException (UnChecked)
+    - 컴파일러가 잡아내지 못함 실행시 오류발생
+    - 이건 throws안해도 컴파일 됨 JVM에서 실행할때 멈춰줌
+    - try catch말고 조건문으로 처리
+    - 종류
+        - NullPointerException
+        - IllegalArgumentException
+        - IndexOutOfBoundException
+        - SystemException
+- OtherException (Checked)
+    - try catch문으로 처리
+    - 컴파일러가 확인가능
+    - 종류
+        - IOException
+        - SqlException
+- try블럭은 전체 속도를 무지 느리게 만든다(꼭 필요한 부분만 사용, 영역을 작게 지정)
+- **throws**
+    - 자신에게서 발생한 예외를 바로 처리하지않고 자신을 호출한 곳으로 넘김
+    - throws는 아무것도 안하다가 어? 예외 생겻네? 하면 던져주고
+    try는 한줄한줄 빡빡하게 검사하면서 예외처리(그래서 느림)
+- **throw**
+    - 스스로 예외를 발생시킴
+    - new UserException();//이런식으로 직접 만든 예외를 던질때 많이 사용
+- **유저가 정의 예외처리**
+    - 클래스를 생성한뒤 Exception을 상속 받아서 만듦
+    - 보통 message를 매개변수로 갖는 생성자를 재정의 해줌
+- **finally**
+    - try ~ catch ~ finally이런식으로 사용
+    - 예외가 생기든 안생기든 무조건 finally문은 실행 시켜줌( try가 끝난후, catch가 실행된후에 마지막에 실행됨)
+- **AutoCloseable**
+    - 파일입출력처럼 닫아줘야 되는애는 예외처리가 까다로움 그래서 autocloseable을 지원함
+    - autocloseable에 넣을수 있는 객체는 autocloseable인터페이스를 구현한 객체여야한다
+
+- 기타사항
+    - 만약 catch문에서 적어준 예외말고 다른예외가 발생하면 try에서 멈추고 빠져나간뒤
+      catch문 실행안됨
+    - try문은 조건문처럼 실행 될수도 실행 안될수도 있는 공간이다
+      만약 초기화 되지않은 지역변수를 try안에서만 초기화했다면 이를 사용할때 오류가 날 수 있다
+    - Exception call 순서
+        - instanceof와 마찬가지로 try catch 도 Exception이 상속관계이면 구체적인 Exception부터한다.
+    - **Exception method overriding** : 클래스가 상속 관계가 있을때 자식의 예외는 부모가 처리한 예외보다 좁은 범위여야한다(자식 예외) 
+    (상속의 접근 지정자는 부모가 지정한 접근지정자보다 자식이 넓어야한다)
+    - 현업에서 Exception을 최상위로 표시하면 안댐 쫒겨남
+      부하를 많이 검
+    - catch에서 예외를 등록할때 |를 이용해 여러개 등록할 수 있음
+      ex) catch(FileNotFoundException | NullPointerException e){}
+
+### 17. IO
+
+- 자바의 I/O는 Stream을 통해서 데이터를 주고 받는 구조
+1. Node Stream
+    - Node: 데이터의 소스 or 목적지
+    - IO스트림은 전송되는 데이터 타입, 노드타입, 방향에따라 다양한 클래스가 제공됨
+        - 데이터타입: byte(~~~Stream), char(~~~Reader,Writer)
+        - 노드타입: 키보드,모니터, 파일, 네트워크
+        - 방향: input, output, Reader, Writer
+    - : (키보드, 모니터)==표준IO, 파일IO, 네트워크IO 터미널, Node
+2. 보조 Stream(Filter Stream)
+    - 노드 스트림과 달리 노드에 직접 연결되지 않고 다른 스트림과 연력하여 사용
+    - Node Stream만으로 부족한 기능들을 Filter Stream을 통해 확장, 변환시켜줌
+    - 필터 생성자는 반드시, 생성자에 다른 필터, 또는 노드를 가르켜야한다.
+    - 버퍼드는 바이트 타입 넣어주면 안됨. 그래서 reader를 통해 넣어줌
+    BufferedReader br= new BufferedReader(new 필터(new 노드));
+    BufferedReader br= new BufferedReader(new InputStreamReader(new FileInputStream( new File("text.txt"))));
+    - PrintWriter
+    얘는 바이트 단위 받을수 잇게 오버로딩 되어있음
+    close도 그냥 적어만 주면됨
+
+    [보조 스트림](https://www.notion.so/cf9e9ac49c914090a307a55c7c5b73cd)
+
+- **FILE I/O**
+    - FileIO에서 read는 int형(4바이트)만큼씩 읽어옴
+    파일의 데이터는 char형(1바이트)로 구성이 되어잇음
+    그래서 1을 읽어온다할경우
+    00000000 00000000 00000000 00000001으로 읽어옴
+    앞부분의 3바이트는 0으로 채움
+    만약 파일의 끝(마지막)에 도달하면 -1리턴
+    이때 -1은 11111111 11111111 11111111 11111111임
+    파일에서 char형 -1은 00000000 00000000 00000000 11111111임
+    - IO를 try처리 해주게되면 IOException이나 close처리해주거나 null인경우 처리가 번거러움
+    이때 AutoClosable을 사용하면 편함
+    try(여기에 선언해주면 알아서 close해줌){
+
+        }
+
+        - 노드 스트림만 이용한 경우
+
+        ```java
+        		//Node
+        		File source = new File("IOTest1.java"); // . 현재경로 , .. 상위경로
+        		String desName = "IOTest3.java";
+
+        		//		FileInput, FileOutput(NodeStream)
+        		//		현재 프로젝트 폴더에 있는 IOTest1.java 파일을 C:\IOTest1.java파일로 복사
+        		FileInputStream fis = null;
+        		FileOutputStream fos = null;
+        		try {
+        			fis = new FileInputStream(source);
+        			fos = new FileOutputStream(desName);
+        //			파일 마지막까지 읽을때까지 읽어서 모든 바이트를 출력 파일에 쓰기
+        			int data = 0;
+        			while( (data = fis.read()) != -1) {
+        				fos.write(data);
+        			}
+        			fos.flush();  // 습관적 실행
+        //			close구문을 실행하면 자신이 내부 flush메소드를 호출하고 닫기한다.
+        			System.out.println("파일 복사 성공");
+        		}catch(FileNotFoundException e) {
+        			System.out.println("파일 오류 e:" + e);
+        		}catch(IOException e){
+        			System.out.println("입출력 오류 : " + e);
+        		}finally {
+        			try {
+        				if(fos != null) {
+        					fos.close();
+        				}
+        			}catch(IOException e) {
+        			}
+        			try {
+        				if(fis != null) {
+        					fis.close();
+        				}
+        			}catch(IOException e) {
+        			}
+        		}
+        ```
+
+        - 보조 스트림을 이용한 경우
+
+        ```java
+        		File source = new File("IOTest1.java"); // . 현재경로 , .. 상위경로
+        		String desName = "IOTest5.java";
+        		
+        		BufferedReader br = null;
+        		PrintWriter pw = null;
+        		try {
+        			br = new BufferedReader
+        					(new InputStreamReader
+        							(new FileInputStream(source)));
+        			pw = new PrintWriter(new FileOutputStream(desName));
+        			String data = null; //마지막 정보를 읽으면 null을 반환
+        			while( (data = br.readLine()) != null) {
+        				pw.println(data);
+        			}
+        			pw.flush();  // 습관적 실행
+        			System.out.println("파일 복사 성공");
+        		}catch(FileNotFoundException e) {
+        			System.out.println("파일 오류 e:" + e);
+        		}catch(IOException e){
+        			System.out.println("입출력 오류 : " + e);
+        		}finally {
+        			pw.close();//pw는 안해줘도됨
+        			try {
+        				if(br != null) {
+        					br.close();
+        				}
+        			}catch(IOException e) {
+        			}
+        		}
+        ```
+
+        - AutoClosable사용
+
+        ```java
+        try ( BufferedReader br = new BufferedReader
+        				(new InputStreamReader
+        						(new FileInputStream(source)));
+        				PrintWriter pw  = new PrintWriter(new FileOutputStream(desName)); 	
+        			) {
+        			String data = null; //마지막 정보를 읽으면 null을 반환
+        			while( (data = br.readLine()) != null) {
+        				pw.println(data);
+        			}
+        			pw.flush();  // 습관적 실행
+        			System.out.println("파일 복사 성공");
+        		}catch(FileNotFoundException  | NullPointerException e) {
+        			System.out.println("같은 처리" + e);
+        		}catch(IOException e){
+        			System.out.println("같은 처리 " + e);
+        		}
+        ```
+
+- RandomAccessFile: 인풋 아웃풋 둘다가능
+
+*참고:[https://blog.naver.com/force44/130096540429](https://blog.naver.com/force44/130096540429)*
+
+### 객체 직렬화(SerialLizable)
+
+---
+
+- 객체 직렬화란?
+말그대로 객체를 직렬화하여 전송 가능한 형태로 만드는 것을 의미한다. 객체들의 데이터를 연속적인 데이터로 변형하여 Stream을 통해 데이터를 읽도록 해준다.
+- 데이터들은 전부 오프젝트화 시켜서 바이트배열로 만들어 저장함
+저장한 데이터를 불러올때 serialVersion으로 객체 구분함
+불러온 데이터는 Object형으로 불러와지니까 형변환해서 저장해야함
+    - 객체를 파일에 저장-> Stream은 모든 정보를 byte[] 배열로 전송
+    -> 객체 입출력에 사용되는 입출력 객체가 바로 ObjectInput(Output)Stream
+- 직렬화를 하면 serialVersionUID로 객체가 같은 객체인지 구분함
+그래서 꼭 명시적으로 UID를 지정해줘야됨
+안그러면 객체의 메소드나 필드가 바뀌면 같은 객체인지 못알아봄 데이터 깨짐
+- 직렬화를 할려면 Serializable 인터페이스를 구현해준 클래스여야만 함
+- transient키워드를 앞에 붙이면 해당 필드는 객체 직렬화에서 제외됨 (default값 들어감)
+
+```java
+class Person implements Serializable{
+
+	private static final long serialVersionUID = -3539476484067494349L;
+// 반드시 serivUID 값 랜덤생성
+	
+	String name;
+}
+
+public class SerialTest {
+
+	public SerialTest() throws Exception {
+		Person person = new Person();
+		person.name = "김길동";
+
+//    데이터 저장
+//		ObjectOutputStream oos = null;
+//		
+//		oos = new ObjectOutputStream(new FileOutputStream("sam.dat"));
+//		oos.writeObject(person);
+		
+//  데이터 불러오기
+		ObjectInputStream ois =
+				new ObjectInputStream(new FileInputStream("sam.dat"));
+		
+		Person newPerson = (Person)ois.readObject();
+		System.out.println(newPerson);
+	}
+
+	public static void main(String[] args) throws Exception{
+		new SerialTest();
+	}
+}
+```
